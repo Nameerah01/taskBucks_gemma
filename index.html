@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskBucks — Get things done</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <a class="brand" href="#">
+            <span class="brand-icon">✦</span> TaskBucks
+        </a>
+
+        <p class="nav-label">MENU</p>
+        <button class="nav-item active" data-section="dashboard">⌂ Dashboard</button>
+        <button class="nav-item" data-section="chores">✧ Household chores</button>
+        <button class="nav-item" data-section="study">▤ Study & focus</button>
+        <button class="nav-item" data-section="questions">✓ Solve questions</button>
+<div class="sidebar-actions">
+    <button id="theme-toggle" class="sidebar-action">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Dark mode</span>
+    </button>
+
+    <button id="redeem-menu" class="sidebar-action" onclick="showSection('redeem')">
+        <span>💸</span>
+        <span>Convert points to money</span>
+    </button>
+
+    <p id="redeem-hint" class="redeem-hint">
+        <strong>Available only at 150 points</strong>
+    </p>
+</div>
+        <div class="sidebar-bottom">
+            <div class="mini-avatar">TB</div>
+            <div>
+                <strong>TaskBucks</strong>
+                <small>Your daily progress</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL REWARDS SPACE</p>
+                <h1 id="page-title">Make today count.</h1>
+                <p class="subtitle">Small tasks. Real progress. One step at a time.</p>
+            </div>
+            <div class="points-pill">✦ <span id="points">0</span> points</div>
+        </header>
+
+        <section id="dashboard" class="section">
+            <div class="hero">
+                <div>
+                    <p class="eyebrow light">YOUR NEXT WIN STARTS HERE</p>
+                    <h2>Do a little.<br>Earn a little.</h2>
+                    <p>Complete everyday tasks and build your points balance.</p>
+                    <button class="button button-light" onclick="showSection('chores')">
+                        Start a task →
+                    </button>
+                </div>
+                <div class="hero-star">✦</div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Choose your task</h2>
+                    <p class="subtitle">Pick something you can finish today.</p>
+                </div>
+            </div>
+
+            <div class="task-grid">
+                <article class="task-card">
+                    <div class="task-icon purple">✧</div>
+                    <span class="reward">+25 points</span>
+                    <h3>Household chores</h3>
+                    <p>Clean, organize or finish a chore. Submit before-and-after photos.</p>
+                    <button class="button button-dark" onclick="showSection('chores')">
+                        Start chore
+                    </button>
+                </article>
+
+                <article class="task-card">
+                    <div class="task-icon orange">▤</div>
+                    <span class="reward">20 points / 25 min</span>
+                    <h3>Study & focus</h3>
+                    <p>Start a focus session and spend time on your learning goals.</p>
+                    <button class="button button-dark" onclick="showSection('study')">
+                        Start studying
+                    </button>
+                </article>
+
+                <article class="task-card">
+                    <div class="task-icon green">✓</div>
+                    <span class="reward">+15 points</span>
+                    <h3>Solve questions</h3>
+                    <p>Upload your completed questions or work for AI review.</p>
+                    <button class="button button-dark" onclick="showSection('questions')">
+                        Submit work
+                    </button>
+                </article>
+            </div>
+
+            <div class="section-heading">
+                <h2>Recent activity</h2>
+            </div>
+            <div id="activity" class="activity-list">
+                <p class="empty-state">Your completed tasks will appear here.</p>
+            </div>
+        </section>
+        <section id="redeem" class="section hidden">
+    <div class="content-card">
+        <div class="task-icon purple">💸</div>
+        <h2>Convert points to money</h2>
+        <p class="subtitle">
+            Earn at least 150 points to unlock the demo redemption feature.
+        </p>
+
+        <div class="redeem-balance">
+            <span>Your available points</span>
+            <h2><span id="redeem-points">0</span> points</h2>
+            <p id="redeem-status">150 points required to unlock.</p>
+        </div>
+
+        <button id="redeem-button" class="button button-primary" disabled>
+            Unlock at 150 points
+        </button>
+
+        <p class="small-note">
+            Redemption is a preview only. No real money is paid yet.
+        </p>
+        <div id="redeem-result" class="result"></div>
+    </div>
+</section>
+
+        <section id="chores" class="section hidden">
+            <div class="content-card">
+                <div class="task-icon purple">✧</div>
+                <h2>Verify a household chore</h2>
+                <p class="subtitle">Upload a photo from before and after your task.</p>
+
+                <form id="chore-form">
+                    <label for="chore-task">What did you complete?</label>
+                    <input id="chore-task" name="task"
+                           placeholder="e.g. Cleaned my study table" required>
+
+                    <div class="upload-grid">
+                        <label class="upload-box">
+                            <span class="upload-symbol">＋</span>
+                            <strong>Before photo</strong>
+                            <small>Choose an image</small>
+                            <input type="file" name="before" accept="image/*" required>
+                        </label>
+                        <label class="upload-box">
+                            <span class="upload-symbol">＋</span>
+                            <strong>After photo</strong>
+                            <small>Choose an image</small>
+                            <input type="file" name="after" accept="image/*" required>
+                        </label>
+                    </div>
+
+                    <button class="button button-primary" type="submit">
+                        Verify my chore
+                    </button>
+                </form>
+                <div id="chore-result" class="result"></div>
+            </div>
+        </section>
+
+        <section id="questions" class="section hidden">
+            <div class="content-card">
+                <div class="task-icon green">✓</div>
+                <h2>Submit completed work</h2>
+                <p class="subtitle">Upload a clear photo or screenshot of your work.</p>
+
+                <form id="questions-form">
+                    <label for="question-task">What did you work on?</label>
+                    <input id="question-task" name="task"
+                           placeholder="e.g. Solved 10 algebra questions" required>
+
+                    <label class="upload-box single-upload">
+                        <span class="upload-symbol">↑</span>
+                        <strong>Upload your work</strong>
+                        <small>Image up to 5 MB</small>
+                        <input type="file" name="work" accept="image/*" required>
+                    </label>
+
+                    <button class="button button-primary" type="submit">
+                        Check my work
+                    </button>
+                </form>
+                <div id="questions-result" class="result"></div>
+            </div>
+        </section>
+
+        <section id="study" class="section hidden">
+            <div class="content-card study-card">
+                <div class="task-icon orange">▤</div>
+                <h2>Study & focus</h2>
+                <p class="subtitle">Choose a task, optionally turn on your camera, and focus.</p>
+
+                <label for="study-task">What are you studying?</label>
+                <input id="study-task" placeholder="e.g. C++ arrays">
+
+                <div class="timer" id="timer">25:00</div>
+                <p id="timer-status" class="subtitle">Ready when you are.</p>
+
+                <div class="button-row">
+                    <button id="start-timer" class="button button-primary">Start focus</button>
+                    <button id="pause-timer" class="button button-outline">Pause</button>
+                    <button id="reset-timer" class="button button-outline">Reset</button>
+                </div>
+
+                <div class="camera-area">
+                    <video id="camera-preview" autoplay muted playsinline></video>
+                    <p class="subtitle">Optional camera preview. Video stays in your browser and is not uploaded.</p>
+                    <button id="camera-button" class="button button-outline">
+                        Turn camera on
+                    </button>
+                </div>
+                <p class="small-note">
+                    Demo note: this timer does not independently prove that you studied.
+                </p>
+            </div>
+        </section>
+
+        <footer>TaskBucks · Build habits, one task at a time.</footer>
+    </main>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+</body>
+</html>
